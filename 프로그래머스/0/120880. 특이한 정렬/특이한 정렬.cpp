@@ -10,11 +10,15 @@ int num;
 int compare(int prev, int next) {
     bool ret;
     
+    printf("--\n");
+    printf("prev: %d\n", prev);
+    printf("next: %d\n", next);
+    
     if (abs(prev - num) == abs(next - num)) {
-        ret = next < prev;
+        ret = next < prev; // 차가 같다면 큰 값을 왼쪽으로
     }
     else {
-        ret = abs(prev - num) < abs(next - num);
+        ret = abs(prev - num) < abs(next - num); // 차가 적으면 왼쪽으로
     }
     
     return ret;
