@@ -1,38 +1,33 @@
 #include <string>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
 vector<string> solution(vector<string> quiz) {
     vector<string> answer;
-    vector<string> tokens;
-    string token = "";
+    
+    int num1;
+    int num2;
+    int num3;
+    char oper;
+    char equal;
     
     for (int i = 0; i < quiz.size(); i++) {
-        for (int j = 0; j < quiz[i].length(); j++) {
-            if (quiz[i][j] != ' ') 
-                token += quiz[i][j];
-
-            if (quiz[i][j] == ' ' or j >= quiz[i].length() - 1) {
-                if (token != "") {
-                    tokens.push_back(token);
-                    token = "";
-                }
-            }
-        }
+        stringstream ss;
+        ss.str(quiz[i]);
+        ss >> num1 >> oper >> num2 >> equal >> num3;
         
-        if (tokens[1] == "+") {
-            if (stoi(tokens[0]) + stoi(tokens[2]) == stoi(tokens[4])) 
+        if (oper == '+') {
+            if (num1 + num2 == num3) 
                 answer.push_back("O");
             else answer.push_back("X");
         }
         else {
-            if (stoi(tokens[0]) - stoi(tokens[2]) == stoi(tokens[4])) 
+            if (num1 - num2 == num3)
                 answer.push_back("O");
             else answer.push_back("X");
         }
-        
-        tokens.clear();
     }
     
     return answer;
