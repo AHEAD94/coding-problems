@@ -1,32 +1,25 @@
 #include <string>
 #include <vector>
+#include <sstream>
+#include <algorithm>
 
 using namespace std;
 
 string solution(string s) {
     string answer = "";
-    int min = 999999;
-    int max = -999999;
+    istringstream iss(s);
     string token = "";
-    int temp = 0;
+    vector<int> tokens;
     
-    for (int i = 0; i < s.length(); i++) {
-        if (('0' <= s[i] and s[i] <= '9') or (s[i] == '-')) {
-            token += s[i];
-        }
-        
-        if (s[i] == ' ' or i >= s.length() - 1) {
-            temp = stoi(token);
-            if (temp > max) max = temp;
-            if (temp < min) min = temp;
-            
-            token = "";
-        }
+    while (getline(iss, token, ' ')) {
+        tokens.push_back(stoi(token));
     }
     
-    answer += to_string(min);
+    sort(tokens.begin(), tokens.end());
+    
+    answer += to_string(tokens[0]);
     answer += ' ';
-    answer += to_string(max);
+    answer += to_string(tokens[tokens.size() - 1]);
     
     return answer;
 }
