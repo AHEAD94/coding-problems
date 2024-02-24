@@ -3,9 +3,9 @@
 
 using namespace std;
 
-int pactorial(int i) {
+int factorial(int i) {
     if (i >= 1) {
-        return i * pactorial(i - 1);
+        return i * factorial(i - 1);
     }
     else {
         return 1;
@@ -16,7 +16,7 @@ int solution(int n) {
     int answer = 0;
     
     int num = 0;
-    while (pactorial(num + 1) <= n) {
+    while (factorial(num + 1) <= n) {
         num++;
     }
     
