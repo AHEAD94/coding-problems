@@ -1,35 +1,19 @@
 #include <string>
 #include <vector>
-#include <algorithm>
+#include <queue>
 
 using namespace std;
 
-typedef struct Pair {
-    char nth_char;
-    string full_string;
-};
-
-bool arbitrary(Pair a, Pair b) {
-    if (a.nth_char < b.nth_char) return true;
-    else if (a.nth_char == b.nth_char) return a.full_string < b.full_string;
-    else return false;
-}
-
 vector<string> solution(vector<string> strings, int n) {
     vector<string> answer;
-    vector<Pair> pairs;
+    priority_queue<pair<char, string>, vector<pair<char, string>>, greater<pair<char, string>>> pairs;
     
-    for (int i = 0; i < strings.size(); i ++) {
-        Pair newPair;
-        newPair.nth_char = strings[i][n];
-        newPair.full_string = strings[i];
-        pairs.push_back(newPair);
-    }
+    for (int i = 0; i < strings.size(); i ++)
+        pairs.push(make_pair(strings[i][n], strings[i]));
     
-    sort(pairs.begin(), pairs.end(), arbitrary);
-    
-    for (int i = 0; i < pairs.size(); i++) {
-        answer.push_back(pairs[i].full_string);
+    while (!pairs.empty()) {
+        answer.push_back(pairs.top().second);
+        pairs.pop();
     }
     
     return answer;
