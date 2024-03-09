@@ -15,9 +15,9 @@ int solution(int n, int a, int b)
         int remainder_b = b % 2;
         
         a /= 2;
-        a += remainder_a;
+        if (remainder_a != 0) a++;
         b /= 2;
-        b += remainder_b;
+        if (remainder_b != 0) b++;
     }
     
     return answer;
