@@ -10,7 +10,7 @@ bool byValue(pair<int, int> a, pair<int, int> b) {
 }
 
 // map을 이용해 크기에 따른 귤 개수를 매핑하고
-// vector에 옮겨서 value 기준 정렬한 뒤    
+// vector에 옮겨서 value 기준 정렬한 뒤
 // 박스에 담을 귤 수 차감
 
 int solution(int k, vector<int> tangerine) {
