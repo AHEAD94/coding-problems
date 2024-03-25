@@ -21,6 +21,7 @@ int solution(vector<vector<int>> lines) {
     int answer = 0;
     vector<vector<int>> overlapped;
     
+    // 서로 겹치는 선분들 overlapped에 저장하고 그 길이만큼 answer 증가
     for (int i = 0; i < lines.size() - 1; i++) {
         for (int j = i + 1; j < lines.size(); j++) {
             vector<int> temp_line;
@@ -33,6 +34,7 @@ int solution(vector<vector<int>> lines) {
         }
     }
     
+    // overlapped가 2개 이상이면 answer가 중복으로 증가했으므로 overlapped끼리 겹치는 만큼 감소
     if (overlapped.size() >= 2) {
         for (int i = 0; i < overlapped.size() - 1; i++) {
             vector<int> temp_line;
