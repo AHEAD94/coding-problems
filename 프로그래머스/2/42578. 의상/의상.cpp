@@ -1,12 +1,12 @@
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 
 using namespace std;
 
 int solution(vector<vector<string>> clothes) {
     int answer = 1;
-    map<string, int> clo_num;
+    unordered_map<string, int> clo_num;
     
     for (int i = 0; i < clothes.size(); i++) {
         clo_num[clothes[i][1]]++;
