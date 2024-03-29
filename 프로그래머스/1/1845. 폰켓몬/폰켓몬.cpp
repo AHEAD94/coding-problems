@@ -1,17 +1,20 @@
 #include <vector>
-#include <set>
+#include <unordered_map>
 using namespace std;
 
 int solution(vector<int> nums)
 {
     int answer = 0;
-    set<int> mon_set;
+    unordered_map<int, int> mon_num;
     
     for (int i = 0; i < nums.size(); i++) {
-        mon_set.insert(nums[i]);
+        mon_num[nums[i]]++;
     }
     
-    answer = min(nums.size() / 2, mon_set.size());
-    
+    for (pair<int, int> mon : mon_num) {
+        answer++;
+        if (answer >= nums.size() / 2) break;
+    }
+        
     return answer;
 }
