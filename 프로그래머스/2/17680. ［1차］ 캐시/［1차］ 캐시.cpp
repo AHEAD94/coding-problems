@@ -24,9 +24,9 @@ int solution(int cacheSize, vector<string> cities) {
         for (int i = 0; i < city.length(); i++) {
             upper_city += toupper(city[i]);
         }
-        iter = cache.find(upper_city);
         
         // 실행시간 반영
+        iter = cache.find(upper_city);
         if (iter == cache.end()) {
             cache_miss = true;
             answer += 5;
