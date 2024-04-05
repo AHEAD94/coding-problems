@@ -14,7 +14,8 @@ void DFS(int k, vector<vector<int>> &dungeons, vector<bool> &visited, int count,
         }
     }
     
-    answer = max(answer, count);
+    if (count > answer) answer = count;
+    if (answer == dungeons.size()) return;
 }
 
 int solution(int k, vector<vector<int>> dungeons) {
