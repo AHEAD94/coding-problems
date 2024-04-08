@@ -22,10 +22,6 @@ int BFS(vector<vector<int>> &maps, vector<pair<int, int>> &direction) {
             return depth;
         }
         
-        // 깊이 증가 및 방문 처리
-        depth++;
-        maps[cur_y][cur_x] = 0;
-        
         // 방향별 진행 가능성 검사
         for (int dir = 0; dir < direction.size(); dir++) {
             int next_x = cur_x + direction[dir].first;
@@ -34,7 +30,7 @@ int BFS(vector<vector<int>> &maps, vector<pair<int, int>> &direction) {
             if (0 <= next_x and next_x <= goal_x and 0 <= next_y and next_y <= goal_y) {
                 if (maps[next_y][next_x] == 1) {
                     maps[next_y][next_x] = 0;
-                    route_queue.push({next_x, next_y, depth});
+                    route_queue.push({next_x, next_y, depth + 1});
                 }
             }
         }
