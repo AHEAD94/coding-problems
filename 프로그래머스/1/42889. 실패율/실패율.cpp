@@ -12,26 +12,30 @@ bool byFailureRate(pair<int, float> a, pair<int, float> b) {
 
 vector<int> solution(int N, vector<int> stages) {
     vector<int> answer;
-    map<int, int> stage_players_map;
     int stages_size = stages.size();
-    
-    for (int i = 0; i < stages_size; i++) {
-        stage_players_map[stages[i]]++;
-    }
-    
-    vector<pair<int, int>> stage_players_vect(stage_players_map.begin(), stage_players_map.end());
-    int stage_players_size = stage_players_vect.size();
-    
+
+    // stage별 실패율 초기화 
     vector<pair<int, float>> failure_rates;
     for (int i = 1; i <= N; i++) {
         failure_rates.push_back(make_pair(i, 0.0));
     }
     
+    // map을 이용해 stage별 유저 수 정리
+    map<int, int> temp_map;
+    for (int i = 0; i < stages_size; i++) {
+        temp_map[stages[i]]++;
+    }
+    
+    // pair들을 vector에 옮김
+    vector<pair<int, int>> stage_players(temp_map.size());
+    copy(temp_map.begin(), temp_map.end(), stage_players.begin());
+    int stage_players_size = stage_players.size();
+    
     for (int i = 0; i < stage_players_size; i++) {
-        int stage_idx = stage_players_vect[i].first;
-        int challengers = stage_players_vect[i].second;
+        int stage_idx = stage_players[i].first;
+        int challengers = stage_players[i].second;
         
-        if (stage_idx < N + 1) {
+        if (stage_idx <= N) {
             float failure_rate = (float) challengers / (float) stages_size;
             failure_rates[stage_idx - 1].second = failure_rate;
         }
@@ -40,8 +44,9 @@ vector<int> solution(int N, vector<int> stages) {
     
     sort(failure_rates.begin(), failure_rates.end(), byFailureRate);
     
-    for (pair<int, float> num : failure_rates) {
-        answer.push_back(num.first);
+    for (pair<int, float> failure_rate : failure_rates) {
+        int stage_number = failure_rate.first;
+        answer.push_back(stage_number);
     }
     
     return answer;
