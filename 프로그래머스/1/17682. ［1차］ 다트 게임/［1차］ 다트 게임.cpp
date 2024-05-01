@@ -32,9 +32,7 @@ int solution(string dartResult) {
             scores[scores_idx - 1] *= 2;
             if (scores_idx - 1 > 0) scores[scores_idx - 2] *= 2;
         }
-        if (dartResult[i] == '#') {
-            scores[scores_idx - 1] *= -1;
-        }
+        if (dartResult[i] == '#') scores[scores_idx - 1] *= -1;
     }
     
     for (int i = 0; i < 3; i++) {
