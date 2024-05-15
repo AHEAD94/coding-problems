@@ -12,9 +12,8 @@ struct fileName {
 
 bool byName(fileName f1, fileName f2) {
     if (f1.head == f2.head) {
-        if (f1.number == f2.number) {
+        if (f1.number == f2.number) 
             return f1.index < f2.index;
-        }
         return f1.number < f2.number;
     }
     return f1.head < f2.head;
@@ -26,34 +25,26 @@ vector<string> solution(vector<string> files) {
     int files_size = files.size();
     
     for (int i = 0; i < files_size; i++) {
-        bool is_num = false;
-        string token = "";
-        fileName splited = {i, "", 0};
+        string head = "";
+        string number = "";
         
-        string file = files[i];
-        int file_len = file.length();
-        for (char file_char : file) {
-            if (is_num == false and '0' <= file_char and file_char <= '9') {
-                splited.head = token;
-                token = "";
-                is_num = true;
+        int file_len = files[i].length();
+        for (int j = 0; j < file_len; j++) {
+            if ('0' <= files[i][j] and files[i][j] <= '9') {
+                number += files[i][j];
+                if (!('0' <= files[i][j + 1] and files[i][j + 1] <= '9')) break;
             }
-            if (is_num == true and !('0' <= file_char and file_char <= '9')) {
-                if (token != "") splited.number = stoi(token);
-                token = "";
-                break;
-            }
-            token += file_char;
+            else head += files[i][j];
         }
-        if (token != "") splited.number = stoi(token);
-        
-        int head_len = splited.head.length();
+         
+        int head_len = head.length();
         for (int j = 0; j < head_len; j++) {
-            splited.head[j] = tolower(splited.head[j]);
+            head[j] = tolower(head[j]);
         }
-        sorting_vect.push_back(splited);
+        
+        fileName file_name = {i, head, stoi(number)};
+        sorting_vect.push_back(file_name);
     }
-    
     sort(sorting_vect.begin(), sorting_vect.end(), byName);
     
     for (fileName sorted : sorting_vect) {
