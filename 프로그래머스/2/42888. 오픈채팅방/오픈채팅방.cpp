@@ -31,48 +31,36 @@ void User::ChangeNickName(string _nick_name) {
     this->nick_name = _nick_name;
 }
 
-void PushUser(unordered_map<string, User> &_chat_room, User _user) {
+void UpdateUser(unordered_map<string, User> &_user_info, string _uid, string _nick_name) {
     unordered_map<string, User>::iterator iter;
     
-    iter = _chat_room.find(_user.GetUID());
-    if (iter == _chat_room.end())
-        _chat_room.insert(make_pair(_user.GetUID(), _user));
-    else iter->second.ChangeNickName(_user.GetNickName());
-}
-
-void ChangeUserNickName(unordered_map<string, User> &_chat_room, string _uid, string _nick_name) {
-    unordered_map<string, User>::iterator iter;
-    
-    iter = _chat_room.find(_uid);
-    if (iter != _chat_room.end()) iter->second.ChangeNickName(_nick_name);
+    iter = _user_info.find(_uid);
+    if (iter == _user_info.end()) {
+        User user(_uid, _nick_name);
+        _user_info.insert(make_pair(_uid, user));
+    }
+    else iter->second.ChangeNickName(_nick_name);
 }
 
 vector<string> solution(vector<string> record) {
     vector<string> answer;
-    unordered_map<string, User> chat_room;
+    unordered_map<string, User> user_info;
     vector<pair<string, bool>> user_io_log;
     
     for (string text : record) {
-        string command = "";
-        string uid = "";
-        string nick_name = "";
-        
+        string command, uid, nick_name;
         stringstream ss(text);
         ss >> command;
         ss >> uid;
-        if (command != "Leave") ss >> nick_name;
+        ss >> nick_name;
         
-        if (command == "Enter") {
-            User user(uid, nick_name);
-            PushUser(chat_room, user);
-            user_io_log.push_back(make_pair(uid, true));
-        }
-        else if (command == "Leave") {
+        if (command == "Leave") 
             user_io_log.push_back(make_pair(uid, false));
+        else {
+            if (command == "Enter") 
+                user_io_log.push_back(make_pair(uid, true));
+            UpdateUser(user_info, uid, nick_name);
         }
-        else if (command == "Change") 
-            ChangeUserNickName(chat_room, uid, nick_name);
-        else;
     }
     
     unordered_map<string, User>::iterator iter;
@@ -80,8 +68,8 @@ vector<string> solution(vector<string> record) {
         string uid = log.first;
         bool io_info = log.second;
         
-        iter = chat_room.find(uid);
-        if (iter != chat_room.end()) {
+        iter = user_info.find(uid);
+        if (iter != user_info.end()) {
             User user = iter->second;
             
             string text_log = "";
