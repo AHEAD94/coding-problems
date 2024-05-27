@@ -36,14 +36,7 @@ int solution(string numbers) {
     vector<bool> visited(num_len, false);
     set<int> permutations;
     
-    for (int i = 0; i < num_len; i++) {
-        string st_num = "";
-        st_num += numbers[i];
-        
-        visited[i] = true;
-        DFS(numbers, num_len, visited, 1, st_num, permutations);
-        visited[i] = false;
-    }
+    DFS(numbers, num_len, visited, 0, "", permutations);
     
     set<int>::iterator iter;
     for (iter = permutations.begin(); iter != permutations.end(); iter++) {
