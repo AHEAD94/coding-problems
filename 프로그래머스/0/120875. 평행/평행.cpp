@@ -20,7 +20,7 @@ bool IsAllVisited(vector<bool> &visited) {
     return true;
 }
 
-void DFS(vector<vector<int>> dots, vector<bool> &visited, vector<pair<vector<int>, vector<int>>> &lines) {    
+void DFS(vector<vector<int>> dots, vector<bool> &visited, vector<pair<vector<int>, vector<int>>> &lines, int &answer) {    
     for (int i = 0; i < 3; i++) {
         for (int j = i + 1; j < 4; j++) {
             if (!visited[i] and !visited[j]) {
@@ -31,12 +31,14 @@ void DFS(vector<vector<int>> dots, vector<bool> &visited, vector<pair<vector<int
                 if (IsAllVisited(visited)) {
                     double slope1 = GetSlope(lines[0].first, lines[0].second);
                     double slope2 = GetSlope(lines[1].first, lines[1].second);
-                    if (slope1 == slope2)
+                    if (slope1 == slope2) {
+                        answer = 1;
                         return;
+                    }
                     else lines.clear();
                 }
                 
-                DFS(dots, visited, lines);
+                DFS(dots, visited, lines, answer);
                 visited[i] = false;
                 visited[j] = false;
             }
@@ -51,29 +53,10 @@ int solution(vector<vector<int>> dots) {
     vector<bool> visited(4, false);
     vector<pair<vector<int>, vector<int>>> lines;
 
-    DFS(dots, visited, lines);
+    DFS(dots, visited, lines, answer);
     
     pair<vector<int>, vector<int>> line1;
     pair<vector<int>, vector<int>> line2;
     
-    int lines_size = lines.size();
-    for (int i = 0; i < lines_size; i++) {
-        if (i % 2 == 0) line1 = lines[i];
-        else {
-            line2 = lines[i];
-            
-            double slope1 = GetSlope(line1.first, line1.second);
-            double slope2 = GetSlope(line2.first, line2.second);
-            if (slope1 == slope2) {
-                answer = 1;
-                break;
-            } 
-        }
-        
-        if (i % 2 == 0) cout << "[SET]\nline1: ";
-        else cout << "line2: ";
-        cout << "[" << lines[i].first[0] << ", " << lines[i].first[1] << "], [" << lines[i].second[0] << ", " << lines[i].second[1] << "]" << endl;
-    }
-        
     return answer;
 }
