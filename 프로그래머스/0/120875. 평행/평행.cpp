@@ -1,6 +1,5 @@
 #include <string>
 #include <vector>
-#include <iostream>
 
 using namespace std;
 
@@ -38,7 +37,7 @@ void DFS(vector<vector<int>> dots, vector<bool> &visited, vector<pair<vector<int
                     else lines.clear();
                 }
                 
-                DFS(dots, visited, lines, answer);
+                DFS(dots, visited, lines, answer); 
                 visited[i] = false;
                 visited[j] = false;
             }
@@ -54,9 +53,6 @@ int solution(vector<vector<int>> dots) {
     vector<pair<vector<int>, vector<int>>> lines;
 
     DFS(dots, visited, lines, answer);
-    
-    pair<vector<int>, vector<int>> line1;
-    pair<vector<int>, vector<int>> line2;
     
     return answer;
 }
