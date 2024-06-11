@@ -28,22 +28,22 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
     
     while (truck_idx < weight_size) {
         // 트럭이 다리에서 나가는 경우
-        if (on_bridge[bridge_length - 1] != 0) {
-            on_bridge[bridge_length - 1] = 0;
+        if (on_bridge.back() != 0) {
+            on_bridge.back() = 0;
         }
         
         // 트럭이 다리 위에서 길이 1만큼 이동하는 경우
-        if (on_bridge[bridge_length - 1] == 0) {
+        if (on_bridge.back() == 0) {
             for (int i = bridge_length - 1; i > 0; i--) {
                 on_bridge[i] = on_bridge[i - 1];
             }
-            on_bridge[0] = 0;
+            on_bridge.front() = 0;
         }
         
         // 트럭이 다리에 진입하는 경우
         int next_weight = truck_weights[truck_idx];
-        if (on_bridge[0] == 0 and GetWeight(on_bridge) + next_weight <= weight) {
-            on_bridge[0] = next_weight;
+        if (on_bridge.front() == 0 and GetWeight(on_bridge) + next_weight <= weight) {
+            on_bridge.front() = next_weight;
             truck_idx++;
         }
         
