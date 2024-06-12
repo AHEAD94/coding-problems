@@ -34,10 +34,8 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
         
         // 트럭이 다리 위에서 길이 1만큼 이동하는 경우
         if (on_bridge.back() == 0) {
-            for (int i = bridge_length - 1; i > 0; i--) {
-                on_bridge[i] = on_bridge[i - 1];
-            }
-            on_bridge.front() = 0;
+            on_bridge.insert(on_bridge.begin(), 0);
+            on_bridge.pop_back();
         }
         
         // 트럭이 다리에 진입하는 경우
