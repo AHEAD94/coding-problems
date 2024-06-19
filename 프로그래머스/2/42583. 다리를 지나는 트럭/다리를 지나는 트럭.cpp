@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <numeric>
 
 using namespace std;
 
@@ -12,16 +13,13 @@ void PrintVector(const T& vector_begin, const T& vector_end) {
     cout << endl;
 }
 
-int GetWeight(vector<int> &on_bridge) {
-    int net_weight = 0;
-    for (int weight : on_bridge) {
-        net_weight += weight;
-    }
-    return net_weight;
+int GetWeight(const vector<int>& on_bridge) {
+    return accumulate(on_bridge.begin(), on_bridge.end(), 0);
 }
 
 int solution(int bridge_length, int weight, vector<int> truck_weights) {
     int answer = 0;
+    int time = 0;
     int weight_size = truck_weights.size();
     int truck_idx = 0;
     vector<int> on_bridge(bridge_length, 0);
@@ -45,13 +43,13 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
             truck_idx++;
         }
         
-        answer++;
+        time++;
         
         // cout << "[" << answer << "]" << endl;
         // PrintVector(on_bridge.begin(), on_bridge.end());
     }
     
-    answer += bridge_length;
+    answer = time + bridge_length;
         
     return answer;
 }
