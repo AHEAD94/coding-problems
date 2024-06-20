@@ -6,8 +6,8 @@
 using namespace std;
 
 template<class T>
-void PrintVector(const T& vector_begin, const T& vector_end) {
-    for (auto iter = vector_begin; iter != vector_end; iter++) {
+void PrintContainer(const T& container_begin, const T& container_end) {
+    for (auto iter = container_begin; iter != container_end; iter++) {
         cout << *iter << "\t";
     }
     cout << endl;
