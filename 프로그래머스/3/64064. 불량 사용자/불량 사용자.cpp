@@ -29,9 +29,11 @@ void DFS(vector<string>& user_id, vector<string>& banned_id, vector<bool>& visit
         
         if (visited[u_idx] == false and IsCandidate(banned_id[depth], *u_iter)) {
             visited[u_idx] = true;
-            set<string> next_comb = temp_comb;
-            next_comb.insert(user_id[u_idx]);
-            DFS(user_id, banned_id, visited, depth + 1, next_comb);
+            
+            set<string> temp = temp_comb;
+            temp.insert(user_id[u_idx]);
+            DFS(user_id, banned_id, visited, depth + 1, temp);
+            
             visited[u_idx] = false;
         }
     }
