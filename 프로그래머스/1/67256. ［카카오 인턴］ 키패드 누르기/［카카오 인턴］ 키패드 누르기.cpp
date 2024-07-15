@@ -21,12 +21,12 @@ string solution(vector<int> numbers, string hand) {
             else l_pos = {(*iter - 1) / 3, (*iter - 1) % 3};
             answer += 'L';
         }   
-        if (*iter == 3 or *iter == 6 or *iter == 9 or *iter == '#') {
+        else if (*iter == 3 or *iter == 6 or *iter == 9 or *iter == '#') {
             if (*iter == '#') r_pos = {3, 2};
             else r_pos = {(*iter - 1) / 3, (*iter - 1) % 3};
             answer += 'R';
         }
-        if (*iter == 2 or *iter == 5 or *iter == 8 or *iter == 0) {
+        else if (*iter == 2 or *iter == 5 or *iter == 8 or *iter == 0) {
             pair<int, int> num_pos;
             if (*iter == 0) num_pos = {3, 1};
             else num_pos = {(*iter - 1) / 3, (*iter - 1) % 3};
@@ -39,13 +39,13 @@ string solution(vector<int> numbers, string hand) {
                 l_pos = num_pos;
                 answer += 'L';
             }
-            if (GetDist(l_pos, num_pos) > GetDist(r_pos, num_pos)) {
+            else if (GetDist(l_pos, num_pos) > GetDist(r_pos, num_pos)) {
                 r_pos = num_pos;
                 answer += 'R';
             }
-            if (GetDist(l_pos, num_pos) == GetDist(r_pos, num_pos)) {
+            else {
                 if (hand.front() == 'l') l_pos = num_pos;
-                if (hand.front() == 'r') r_pos = num_pos;
+                else if (hand.front() == 'r') r_pos = num_pos;
                 answer += toupper(hand.front());
             }
         }
