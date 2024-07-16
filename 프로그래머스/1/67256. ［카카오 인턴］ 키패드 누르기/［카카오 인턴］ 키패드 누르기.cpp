@@ -4,8 +4,12 @@
 
 using namespace std;
 
-int GetDist(pair<int, int> p1, pair<int, int> p2) {
+int GetDist(const pair<int, int> p1, const pair<int, int> p2) {
     return abs(p1.first - p2.first) + abs(p1.second - p2.second);
+}
+
+pair<int, int> GetKeyPos(const int key_num) {
+    return {(key_num - 1) / 3, (key_num - 1) % 3};
 }
 
 string solution(vector<int> numbers, string hand) {
@@ -18,18 +22,18 @@ string solution(vector<int> numbers, string hand) {
         
         if (*iter == 1 or *iter == 4 or *iter == 7 or *iter == '*') {
             if (*iter == '*') l_pos = {3, 0};
-            else l_pos = {(*iter - 1) / 3, (*iter - 1) % 3};
+            else l_pos = GetKeyPos(*iter);
             answer += 'L';
         }   
         else if (*iter == 3 or *iter == 6 or *iter == 9 or *iter == '#') {
             if (*iter == '#') r_pos = {3, 2};
-            else r_pos = {(*iter - 1) / 3, (*iter - 1) % 3};
+            else r_pos = GetKeyPos(*iter);
             answer += 'R';
         }
         else if (*iter == 2 or *iter == 5 or *iter == 8 or *iter == 0) {
             pair<int, int> num_pos;
             if (*iter == 0) num_pos = {3, 1};
-            else num_pos = {(*iter - 1) / 3, (*iter - 1) % 3};
+            else num_pos = GetKeyPos(*iter);
             
             // cout << "MIDDLE COLUNM" << endl;
             // cout << "Dist L : " << GetDist(l_pos, num_pos) << endl;
