@@ -26,8 +26,8 @@ int solution(int n) {
     int answer = 0;
     vector<int> memo(n + 1, 0);
     
-    //answer = GetTabulFibo(n);
-    answer = GetMemoFibo(n, memo);
+    answer = GetTabulFibo(n);
+    //answer = GetMemoFibo(n, memo);
     
     return answer;
 }
