@@ -1,24 +1,19 @@
 #include <iostream>
-#include <set>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
-int main() {
-    set<int> num_set;
-    
+int main() {    
     int nums;
     cin >> nums;
     
+    vector<int> num_vect(nums, 0);
+    
     for (int i = 0; i < nums; i++) {
-        int num;
-        cin >> num;    
-        num_set.insert(num);
+        cin >> num_vect[i];    
     }
     
-    vector<int> num_vect(num_set.size());
-    copy(num_set.begin(), num_set.end(), num_vect.begin());
     sort(num_vect.begin(), num_vect.end());
     
     for (int num : num_vect) {
