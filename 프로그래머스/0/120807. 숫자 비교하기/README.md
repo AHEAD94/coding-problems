@@ -1,14 +1,16 @@
 # [level 0] 숫자 비교하기 - 120807 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/120807) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/120807?language=swift) 
 
 ### 성능 요약
 
-메모리: 3.59 MB, 시간: 0.01 ms
+메모리: 16.3 MB, 시간: 0.01 ms
 
 ### 구분
 
-코딩테스트 연습 > 코딩테스트 입문
+코딩테스트 연습
+ > 코딩테스트 입문
+
 
 ### 채점결과
 
@@ -16,7 +18,7 @@
 
 ### 제출 일자
 
-2024년 2월 4일 22:44:16
+2025년 01월 16일 21:26:40
 
 ### 문제 설명
 
