@@ -1,31 +1,30 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
+
+void DFS(int N, int M, int start, vector<int>& result) {
+    if (result.size() == M) {
+        for (int num : result) {
+            cout << num << ' ';
+        }
+        cout << '\n';
+        return;
+    }
+
+    for (int i = start; i < N; i++) {
+        result.push_back(i + 1);
+        DFS(N, M, i + 1, result);
+        result.pop_back();
+    }
+}
 
 int main() {
     int N, M;
     cin >> N >> M;
-    
-    vector<int> nums;
-    for (int i = 1; i <= N; i++) {
-        nums.push_back(i);
-    }
-    
-    vector<int> cases(N, 0);
-    for (int i = 0; i < M; i++) {
-        cases[i] = 1;
-    }
-    
-    do {
-        for (int i = 0; i < N; i++) {
-            if (cases[i] == 1) {
-                cout << nums[i] << ' ';
-            }
-        }
-        cout << '\n';
-    } while (prev_permutation(cases.begin(), cases.end()));
-    
+
+    vector<int> result;
+    DFS(N, M, 0, result);
+
     return 0;
 }
