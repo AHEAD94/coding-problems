@@ -5,15 +5,6 @@
 
 using namespace std;
 
-struct Store {
-    pair<int, int> position;
-    int distance_sum;
-};
-
-bool ByDist(Store s1, Store s2) {
-    return s1.distance_sum < s2.distance_sum;
-}
-
 int CalculateDistance(const pair<int, int>& d1, const pair<int, int>& d2) {
     return abs(d1.first - d2.first) + abs(d1.second - d2.second);
 }
